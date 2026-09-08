@@ -36,7 +36,7 @@ const GiftBox = ({ onOpen, onComplete }: GiftBoxProps) => {
       tl.fromTo(
         glowRef.current,
         { opacity: 0, scale: 0.6 },
-        { opacity: 1, scale: 1, duration: 1.6, ease: "power2.out" }
+        { opacity: 1, scale: 1, duration: 1.6, ease: "power2.out" },
       );
 
       // The gift drops in
@@ -51,21 +51,21 @@ const GiftBox = ({ onOpen, onComplete }: GiftBoxProps) => {
           duration: 1.5,
           ease: "back.out(1.5)",
         },
-        "-=1.2"
+        "-=1.2",
       );
 
       tl.fromTo(
         headerRef.current,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" },
-        "-=0.8"
+        "-=0.8",
       );
 
       tl.fromTo(
         promptRef.current,
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
-        "-=0.6"
+        "-=0.6",
       );
 
       // Idle life: the gift floats, the glow pulses, the prompt breathes
@@ -152,7 +152,7 @@ const GiftBox = ({ onOpen, onComplete }: GiftBoxProps) => {
         yoyo: true,
         ease: "sine.inOut",
       },
-      "-=0.3"
+      "-=0.3",
     );
 
     tl.to(boxRef.current, {
@@ -173,7 +173,7 @@ const GiftBox = ({ onOpen, onComplete }: GiftBoxProps) => {
         duration: 1.1,
         ease: "power3.out",
       },
-      "lift"
+      "lift",
     );
 
     tl.to(
@@ -183,7 +183,7 @@ const GiftBox = ({ onOpen, onComplete }: GiftBoxProps) => {
         duration: 0.5,
         ease: "back.out(2.6)",
       },
-      "lift"
+      "lift",
     );
 
     // Light pours out of the open box
@@ -197,7 +197,7 @@ const GiftBox = ({ onOpen, onComplete }: GiftBoxProps) => {
         duration: 0.9,
         ease: "power2.out",
       },
-      "lift"
+      "lift",
     );
 
     tl.to(
@@ -208,7 +208,7 @@ const GiftBox = ({ onOpen, onComplete }: GiftBoxProps) => {
         duration: 1.2,
         ease: "power2.out",
       },
-      "lift"
+      "lift",
     );
 
     // Sparkle burst - they start hidden in CSS, so flash them on before flinging
@@ -233,7 +233,7 @@ const GiftBox = ({ onOpen, onComplete }: GiftBoxProps) => {
           ease: "power2.out",
           stagger: 0.02,
         },
-        "lift"
+        "lift",
       );
     }
 
@@ -246,7 +246,7 @@ const GiftBox = ({ onOpen, onComplete }: GiftBoxProps) => {
         duration: 0.9,
         ease: "power2.in",
       },
-      "lift+=0.6"
+      "lift+=0.6",
     );
 
     // Warm flash washes the screen out...
@@ -257,7 +257,7 @@ const GiftBox = ({ onOpen, onComplete }: GiftBoxProps) => {
         duration: 0.55,
         ease: "power2.in",
       },
-      "lift+=0.7"
+      "lift+=0.7",
     );
 
     // ...then settles into the dark that the next scene fades up from
@@ -268,7 +268,7 @@ const GiftBox = ({ onOpen, onComplete }: GiftBoxProps) => {
         duration: 0.6,
         ease: "power2.inOut",
       },
-      "lift+=1.15"
+      "lift+=1.15",
     );
 
     tl.call(() => {
@@ -290,11 +290,6 @@ const GiftBox = ({ onOpen, onComplete }: GiftBoxProps) => {
 
       <div ref={headerRef} className="gift-header">
         <p>SOMETHING IS WAITING FOR YOU</p>
-
-        <h1>
-          Happy Birthday
-          <span> {birthdayData.name} </span>
-        </h1>
 
         <div className="gift-header-line" />
       </div>

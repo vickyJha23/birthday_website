@@ -78,11 +78,11 @@ const FlowerGarden = ({ onComplete }: {onComplete: () => void}) => {
         stagger: 0.15,
       });
 
-      // Continue after garden
+      // Let the garden breathe before moving on
       tl.call(() => {
         setTimeout(() => {
           onComplete?.();
-        }, 5000);
+        }, 9000);
       });
     }, sceneRef);
 

@@ -180,12 +180,12 @@ const BirthdayReveal = ({
       });
 
       /*
-       * Wait 2.5 seconds
+       * Hold on the message for a while
        * then move to garden
        */
       timeline.call(() => {
         onComplete?.();
-      }, [], "+=2.5");
+      }, [], "+=5");
     }, scene);
 
     return () => {

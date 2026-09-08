@@ -492,6 +492,11 @@ const Fireworks = ({
         launchHeart();
       }, 3500);
 
+    const secondHeartTimer =
+      window.setTimeout(() => {
+        launchHeart();
+      }, 6400);
+
     /*
      * Final big celebration
      */
@@ -509,7 +514,7 @@ const Fireworks = ({
         }
 
         launchHeart();
-      }, 5200);
+      }, 9200);
 
     /*
      * Finish
@@ -519,7 +524,7 @@ const Fireworks = ({
         window.clearInterval(interval);
 
         onComplete?.();
-      }, 9000);
+      }, 13500);
 
     return () => {
       cancelAnimationFrame(
@@ -540,6 +545,10 @@ const Fireworks = ({
 
       window.clearTimeout(
         heartTimer
+      );
+
+      window.clearTimeout(
+        secondHeartTimer
       );
 
       window.clearTimeout(

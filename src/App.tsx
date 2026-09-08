@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import BirthdayReveal from "./components/BirthdayReveal";
@@ -49,21 +49,130 @@ const ONE_SHOT_TRACKS = new Set<string>([
 // How long one track takes to hand over to the next
 const CROSSFADE_MS = 1600;
 
+/*
+ * Scene changes run through one veil: the old scene dims out, the swap happens
+ * behind full darkness, the screen holds there for a beat, then the new scene
+ * rises. The hold is what stops the site feeling like it is rushing you along.
+ */
+const VEIL_OUT_MS = 750;
+const VEIL_HOLD_MS = 450;
+const VEIL_IN_MS = 1200;
+
 const App = () => {
   const [scene, setScene] = useState<string>("gift");
-  const [volume, setVolume] = useState(0.5);
+  const [volume] = useState(0.5);
   const [audio, setAudio] = useState<string>("");
   const [loop, setLoop] = useState<boolean>(true);
   const [play, setPlay] = useState<boolean>(false);
 
-  const handleAudio = (src: string) => {
+  const handleAudio = useCallback((src: string) => {
     setAudio(src);
     setLoop(!ONE_SHOT_TRACKS.has(src));
-  };
-  
-  const handlePlay = (ply:boolean) => {
+  }, []);
+
+  const handlePlay = useCallback((ply: boolean) => {
     setPlay(ply);
-  };
+  }, []);
+
+  const veilRef = useRef<HTMLDivElement | null>(null);
+  const swapPending = useRef<boolean>(false);
+  const veilTimers = useRef<number[]>([]);
+
+  useEffect(() => {
+    const timers = veilTimers.current;
+    return () => timers.forEach((id) => window.clearTimeout(id));
+  }, []);
+
+  /*
+   * `immediate` is for scenes that already faded themselves to black (the gift
+   * box does). The veil takes over at full opacity so there is no double fade.
+   */
+  const goToScene = useCallback((next: string, immediate = false) => {
+    const veil = veilRef.current;
+
+    if (!veil) {
+      setScene(next);
+      return;
+    }
+
+    // Only guard the dimming half. Once the new scene is up the veil is just
+    // lifting, and a change asked for then should take over rather than vanish.
+    if (swapPending.current) return;
+    swapPending.current = true;
+
+    veilTimers.current.forEach((id) => window.clearTimeout(id));
+    veilTimers.current = [];
+
+    const outMs = immediate ? 0 : VEIL_OUT_MS;
+
+    veil.style.transitionDuration = `${outMs}ms`;
+    veil.style.opacity = "1";
+
+    veilTimers.current.push(
+      window.setTimeout(() => {
+        setScene(next);
+        swapPending.current = false;
+
+        veilTimers.current.push(
+          window.setTimeout(() => {
+            veil.style.transitionDuration = `${VEIL_IN_MS}ms`;
+            veil.style.opacity = "0";
+          }, VEIL_HOLD_MS)
+        );
+      }, outMs)
+    );
+  }, []);
+
+  const toReveal = useCallback(() => {
+    goToScene("reveal");
+    handleAudio(MUSIC_STORE.softPiano);
+    handlePlay(true);
+  }, [goToScene, handleAudio, handlePlay]);
+
+  const toGarden = useCallback(() => {
+    goToScene("garden");
+    handleAudio(MUSIC_STORE.pianoSolo);
+  }, [goToScene, handleAudio]);
+
+  const toMemories = useCallback(() => {
+    goToScene("memories");
+    handleAudio(MUSIC_STORE.emotionalPiano);
+  }, [goToScene, handleAudio]);
+
+  const toLoveLetter = useCallback(() => {
+    goToScene("loveletter");
+  }, [goToScene]);
+
+  const toCountdown = useCallback(() => {
+    goToScene("countdown");
+    handleAudio(MUSIC_STORE.countDown);
+  }, [goToScene, handleAudio]);
+
+  const toFireworks = useCallback(() => {
+    goToScene("fireworks");
+    handleAudio(MUSIC_STORE.fireworks);
+  }, [goToScene, handleAudio]);
+
+  const toFinal = useCallback(() => {
+    goToScene("final");
+    handleAudio(MUSIC_STORE.nonstalgia);
+  }, [goToScene, handleAudio]);
+
+  const toGiftAgain = useCallback(() => {
+    goToScene("gift");
+    handlePlay(false);
+  }, [goToScene, handlePlay]);
+
+  const onGiftOpened = useCallback(() => {
+    // Tapping the gift is the first gesture, so audio can start here
+    handleAudio(MUSIC_STORE.dreamer);
+    handlePlay(true);
+  }, [handleAudio, handlePlay]);
+
+  // The gift box fades itself to black, so the veil takes over already covered
+  const toHero = useCallback(() => {
+    goToScene("hero", true);
+  }, [goToScene]);
 
   return (
     <main className="">
@@ -76,14 +185,7 @@ const App = () => {
       />
       {scene === "gift" && (
         <SceneTransition sceneKey="gift">
-          <GiftBox
-            onOpen={() => {
-              // Tapping the gift is the first gesture, so audio can start here
-              handleAudio(MUSIC_STORE.dreamer);
-              handlePlay(true);
-            }}
-            onComplete={() => setScene("hero")}
-          />
+          <GiftBox onOpen={onGiftOpened} onComplete={toHero} />
         </SceneTransition>
       )}
 
@@ -91,72 +193,52 @@ const App = () => {
          <SceneTransition sceneKey="hero">
              <>
           <Navbar />
-          <Hero onBegin={() => {
-            setScene("reveal")
-            handleAudio(MUSIC_STORE.softPiano);
-            handlePlay(true);
-          }} />
+          <Hero onBegin={toReveal} />
         </>
          </SceneTransition>
       )}
 
       {scene === "reveal" && (
          <SceneTransition sceneKey="reveal" >
-             <BirthdayReveal visible={true} onComplete={() => {
-          setScene("garden")
-          handleAudio(MUSIC_STORE.pianoSolo);
-          }} />
+             <BirthdayReveal visible={true} onComplete={toGarden} />
          </SceneTransition>
       )}
 
       {scene === "garden" && (
         <SceneTransition sceneKey="garden">
-          <FlowerGarden onComplete={() => {
-            setScene("memories")
-            handleAudio(MUSIC_STORE.emotionalPiano);
-            }} />
+          <FlowerGarden onComplete={toMemories} />
         </SceneTransition>
       )}
 
       {scene === "memories" && (
         <SceneTransition sceneKey="memmorie">
-          <MemoryGallery onComplete={() => setScene("loveletter")} />
+          <MemoryGallery onComplete={toLoveLetter} />
         </SceneTransition>
       )}
 
       {scene === "loveletter" && (
         <SceneTransition sceneKey="loveletter">
-            <LoveLetter handleAudio={handleAudio} onComplete={() => {
-          setScene("countdown")
-          handleAudio(MUSIC_STORE.countDown)
-        }} />
+            <LoveLetter handleAudio={handleAudio} onComplete={toCountdown} />
         </SceneTransition>
       )}
 
       {scene === "countdown" && (
          <SceneTransition sceneKey="countdown">
-             <SurpriseCountdown onComplete={() => {
-          setScene("fireworks")
-          handleAudio(MUSIC_STORE.fireworks)
-        }} />
+             <SurpriseCountdown onComplete={toFireworks} />
          </SceneTransition>
       )}
 
       {scene === "fireworks" && (
         <SceneTransition sceneKey="fireworks">
-          <Fireworks onComplete={() => {
-          setScene("final")
-          handleAudio(MUSIC_STORE.nonstalgia);
-         }} />
+          <Fireworks onComplete={toFinal} />
         </SceneTransition>
       )}
 
       {scene === "final" && <SceneTransition sceneKey="final">
-              <FinalScene onReplay={() => {
-        setScene("gift")
-        handlePlay(false);
-      }} />
+              <FinalScene onReplay={toGiftAgain} />
           </SceneTransition>}
+
+      <div ref={veilRef} className="scene-veil" />
     </main>
   );
 };

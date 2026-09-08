@@ -3,9 +3,21 @@
 
   width: 100%;
   min-height: 100vh;
+
+  transform-origin: 50% 50%;
+  will-change: opacity, transform;
 }
 
-.scene-overlay {
+/*
+ * The veil that covers every scene change, owned by App.
+ *
+ * This is deliberately a CSS transition rather than a GSAP tween: a scene that
+ * auto-advances calls for the next scene from inside its own gsap.context, so a
+ * tween started there would be recorded into that context and reverted the
+ * moment the scene unmounts - dropping the veil exactly when it is needed.
+ */
+
+.scene-veil {
   position: fixed;
   inset: 0;
 
@@ -21,4 +33,7 @@
     );
 
   opacity: 0;
+
+  transition: opacity 750ms ease-in-out;
+  will-change: opacity;
 }

@@ -2,39 +2,34 @@ import { useEffect, useRef, type ReactNode } from "react";
 import gsap from "gsap";
 import "../style/SceneTransition.css";
 
-const SceneTransition = ({ sceneKey, children }: {sceneKey: any, children: ReactNode}) => {
+/*
+ * Fades a scene's content in once it mounts. The darkness between scenes is
+ * owned by App's veil, so there is no overlay here - by the time this runs the
+ * screen is already dark and the veil is on its way out.
+ */
+const SceneTransition = ({
+  sceneKey,
+  children,
+}: {
+  sceneKey: any;
+  children: ReactNode;
+}) => {
   const wrapperRef = useRef(null);
-  const overlayRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-
-      // New scene starts hidden
-      gsap.set(wrapperRef.current, {
-        opacity: 0,
-      });
-
-      gsap.set(overlayRef.current, {
-        opacity: 1,
-      });
-
-      // Black overlay slowly disappears
-      tl.to(overlayRef.current, {
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.inOut",
-      });
-
-      // Scene fades in
-      tl.to(
+      gsap.fromTo(
         wrapperRef.current,
         {
-          opacity: 1,
-          duration: 1,
-          ease: "power2.out",
+          opacity: 0,
+          scale: 1.035,
         },
-        "-=0.4"
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1.5,
+          ease: "power2.out",
+        }
       );
     }, wrapperRef);
 
@@ -42,18 +37,10 @@ const SceneTransition = ({ sceneKey, children }: {sceneKey: any, children: React
   }, [sceneKey]);
 
   return (
-    <div
-      ref={wrapperRef}
-      className="scene-wrapper"
-    >
+    <div ref={wrapperRef} className="scene-wrapper">
       {children}
-
-      <div
-        ref={overlayRef}
-        className="scene-overlay"
-      />
     </div>
   );
-}
+};
 
 export default SceneTransition;
