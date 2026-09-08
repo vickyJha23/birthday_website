@@ -18,6 +18,7 @@ import pianoSolo from "./assets/music/piano_solo.mp3";
 import nonstalgia from "./assets/music/nonstalgia.mp3";
 import letterOpening from "./assets/music/letter_opening.mp3";
 import heartbeat from "./assets/music/heartbeat-01a.mp3";
+import count_down from "./assets/music/count_down.mp3";
 import firework from "./assets/music/firework.mp3";
 import emotionalPiano from "./assets/music/emotional_piano.mp3";
 import dreamer from "./assets/music/dreamer.mp3";
@@ -32,6 +33,7 @@ export const MUSIC_STORE = {
    letterOpening: letterOpening,
    heartbeat: heartbeat,
    fireworks: firework,
+   countDown: count_down,
    emotionalPiano: emotionalPiano,
    dreamer: dreamer
 }
@@ -97,7 +99,7 @@ const App = () => {
         <SceneTransition sceneKey="loveletter">
             <LoveLetter handleAudio={handleAudio} onComplete={() => {
           setScene("countdown")
-          handleAudio(MUSIC_STORE.heartbeat)
+          handleAudio(MUSIC_STORE.countDown)
         }} />
         </SceneTransition>
       )}
