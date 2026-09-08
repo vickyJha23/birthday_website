@@ -1,0 +1,670 @@
+.gift-scene {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: #07050c;
+  color: white;
+
+  perspective: 1200px;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.gift-background {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 48%,
+      rgba(140, 50, 120, 0.28),
+      transparent 48%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(190, 45, 100, 0.14),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      #05040a 0%,
+      #120a1c 50%,
+      #07050c 100%
+    );
+}
+
+.gift-glow {
+  position: absolute;
+
+  width: 620px;
+  height: 620px;
+
+  left: 50%;
+  top: 54%;
+
+  transform: translate(-50%, -50%);
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 180, 120, 0.22),
+    rgba(255, 90, 150, 0.12) 40%,
+    transparent 68%
+  );
+
+  filter: blur(14px);
+  pointer-events: none;
+}
+
+/* =========================
+   LIGHT MOTES
+========================= */
+
+.gift-motes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gift-motes span {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+  background: #ffe9c9;
+
+  box-shadow: 0 0 8px rgba(255, 210, 160, 0.9);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.gift-header {
+  position: relative;
+  z-index: 5;
+
+  margin-bottom: 42px;
+  text-align: center;
+}
+
+.gift-header p {
+  margin: 0 0 10px;
+
+  font-size: 12px;
+  letter-spacing: 5px;
+
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.gift-header h1 {
+  margin: 0;
+
+  font-size: clamp(30px, 5vw, 52px);
+  font-weight: 400;
+  letter-spacing: 1px;
+
+  color: #fff4ea;
+}
+
+.gift-header h1 span {
+  background: linear-gradient(90deg, #ffb4d2, #ffd9a0);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+}
+
+.gift-header-line {
+  width: 90px;
+  height: 1px;
+
+  margin: 18px auto 0;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 200, 160, 0.75),
+    transparent
+  );
+}
+
+/* =========================
+   STAGE
+========================= */
+
+.gift-stage {
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Light spilling out once the lid is off */
+
+.gift-rays {
+  position: absolute;
+
+  bottom: 55%;
+  left: 50%;
+
+  width: 300px;
+  height: 340px;
+
+  transform: translateX(-50%);
+  transform-origin: 50% 100%;
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gift-rays span {
+  position: absolute;
+
+  bottom: 0;
+  left: 50%;
+
+  width: 16px;
+  height: 100%;
+
+  transform-origin: 50% 100%;
+
+  background: linear-gradient(
+    0deg,
+    rgba(255, 226, 180, 0.55),
+    transparent 75%
+  );
+
+  filter: blur(2px);
+}
+
+.gift-rays span:nth-child(1) { transform: translateX(-50%) rotate(-52deg); }
+.gift-rays span:nth-child(2) { transform: translateX(-50%) rotate(-39deg); }
+.gift-rays span:nth-child(3) { transform: translateX(-50%) rotate(-26deg); }
+.gift-rays span:nth-child(4) { transform: translateX(-50%) rotate(-13deg); }
+.gift-rays span:nth-child(5) { transform: translateX(-50%) rotate(0deg); }
+.gift-rays span:nth-child(6) { transform: translateX(-50%) rotate(13deg); }
+.gift-rays span:nth-child(7) { transform: translateX(-50%) rotate(26deg); }
+.gift-rays span:nth-child(8) { transform: translateX(-50%) rotate(39deg); }
+.gift-rays span:nth-child(9) { transform: translateX(-50%) rotate(52deg); }
+
+/* =========================
+   SPARKLE BURST
+========================= */
+
+.gift-sparkles {
+  position: absolute;
+
+  left: 50%;
+  top: 40%;
+
+  pointer-events: none;
+}
+
+.gift-sparkles span {
+  position: absolute;
+
+  font-size: 19px;
+  line-height: 1;
+
+  color: #ffdcb0;
+  text-shadow: 0 0 12px rgba(255, 180, 130, 0.8);
+
+  opacity: 0;
+}
+
+/* =========================
+   THE GIFT
+========================= */
+
+.gift-box {
+  position: relative;
+
+  width: 240px;
+  height: 250px;
+
+  padding: 0;
+  border: 0;
+
+  background: transparent;
+  color: inherit;
+
+  cursor: pointer;
+
+  transform-origin: 50% 90%;
+}
+
+.gift-box.opened {
+  cursor: default;
+  pointer-events: none;
+}
+
+.gift-box:focus-visible {
+  outline: 2px solid rgba(255, 200, 170, 0.7);
+  outline-offset: 12px;
+  border-radius: 12px;
+}
+
+/* --- Lid --- */
+
+.gift-lid {
+  position: absolute;
+
+  left: 50%;
+  top: 46px;
+
+  width: 234px;
+
+  transform: translateX(-50%);
+  transform-origin: 50% 100%;
+
+  z-index: 3;
+}
+
+.gift-lid-face {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  height: 52px;
+
+  border-radius: 7px;
+
+  background: linear-gradient(
+    180deg,
+    #e8548a 0%,
+    #cf2f6b 55%,
+    #a71d4f 100%
+  );
+
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.45),
+    inset 0 2px 0 rgba(255, 255, 255, 0.35);
+}
+
+.lid-ribbon {
+  position: absolute;
+
+  left: 50%;
+  top: 0;
+
+  width: 30px;
+  height: 100%;
+
+  transform: translateX(-50%);
+
+  background: linear-gradient(
+    180deg,
+    #ffe6a8,
+    #edbc5c 60%,
+    #d59f39
+  );
+
+  box-shadow: inset 0 0 6px rgba(150, 95, 20, 0.35);
+}
+
+/* --- Bow --- */
+
+.gift-bow {
+  position: absolute;
+  z-index: 4;
+
+  left: 50%;
+  bottom: 26px;
+
+  width: 152px;
+  height: 62px;
+
+  transform: translateX(-50%);
+}
+
+/* Two ellipses tilted away from the knot read as ribbon loops */
+
+.bow-loop {
+  position: absolute;
+  bottom: 12px;
+
+  width: 64px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    140deg,
+    #fff0c4,
+    #edbd60 52%,
+    #c9922c
+  );
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    inset -5px -7px 12px rgba(140, 92, 20, 0.4),
+    inset 4px 5px 10px rgba(255, 255, 255, 0.35);
+}
+
+.bow-left {
+  left: 0;
+  transform: rotate(-24deg);
+}
+
+.bow-right {
+  right: 0;
+  transform: rotate(24deg);
+}
+
+/* Ribbon tails fan out from under the knot, with the usual V-cut ends */
+
+.bow-tail {
+  position: absolute;
+  z-index: 2;
+
+  top: 34px;
+
+  width: 26px;
+  height: 58px;
+
+  transform-origin: 50% 0;
+
+  background: linear-gradient(
+    180deg,
+    #ffe4a0,
+    #d29c34 60%,
+    #a06f16
+  );
+
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%);
+
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.55));
+}
+
+.bow-tail-left {
+  left: calc(50% - 24px);
+  transform: rotate(-33deg);
+}
+
+.bow-tail-right {
+  right: calc(50% - 24px);
+  transform: rotate(33deg);
+}
+
+.bow-knot {
+  position: absolute;
+  z-index: 3;
+
+  left: 50%;
+  bottom: 10px;
+
+  width: 34px;
+  height: 28px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    160deg,
+    #fff0c8,
+    #e9b95a 60%,
+    #cc9631
+  );
+
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.4),
+    inset 0 -3px 6px rgba(160, 110, 30, 0.45);
+}
+
+/* --- Body --- */
+
+.gift-body {
+  position: absolute;
+
+  left: 50%;
+  bottom: 22px;
+
+  width: 200px;
+  height: 156px;
+
+  transform: translateX(-50%);
+
+  border-radius: 6px;
+
+  background: linear-gradient(
+    180deg,
+    #d43d78 0%,
+    #b52459 55%,
+    #86163d 100%
+  );
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    inset 0 -14px 24px rgba(0, 0, 0, 0.25);
+
+  z-index: 2;
+}
+
+.body-ribbon-v {
+  position: absolute;
+
+  left: 50%;
+  top: 0;
+
+  width: 30px;
+  height: 100%;
+
+  transform: translateX(-50%);
+
+  background: linear-gradient(
+    180deg,
+    #ffe6a8,
+    #e6b75c 55%,
+    #cf9a34
+  );
+
+  box-shadow: inset 0 0 8px rgba(150, 95, 20, 0.3);
+}
+
+.body-ribbon-h {
+  position: absolute;
+
+  left: 0;
+  top: 38%;
+
+  width: 100%;
+  height: 20px;
+
+  background: linear-gradient(
+    90deg,
+    #d9a63f,
+    #ffe6a8 50%,
+    #d9a63f
+  );
+
+  opacity: 0.85;
+}
+
+.body-shine {
+  position: absolute;
+  inset: 0;
+
+  border-radius: 6px;
+
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    transparent 42%
+  );
+
+  pointer-events: none;
+}
+
+.gift-tag {
+  position: absolute;
+
+  right: -30px;
+  bottom: 18px;
+
+  padding: 6px 12px;
+
+  border-radius: 4px;
+
+  background: #fdf3e2;
+
+  color: #8a2149;
+  font-size: 11px;
+  letter-spacing: 1px;
+
+  transform: rotate(-7deg);
+
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+
+.gift-shadow {
+  position: absolute;
+
+  left: 50%;
+  bottom: 4px;
+
+  width: 210px;
+  height: 26px;
+
+  transform: translateX(-50%);
+
+  background: radial-gradient(
+    ellipse,
+    rgba(0, 0, 0, 0.55),
+    transparent 70%
+  );
+
+  filter: blur(6px);
+  z-index: 1;
+}
+
+/* =========================
+   PROMPT
+========================= */
+
+.gift-prompt {
+  position: relative;
+  z-index: 5;
+
+  margin: 44px 0 0;
+
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+
+  color: rgba(255, 235, 220, 0.75);
+}
+
+/* =========================
+   TRANSITION OVERLAYS
+========================= */
+
+.gift-flash {
+  position: fixed;
+  inset: 0;
+
+  z-index: 60;
+
+  background: radial-gradient(
+    circle at 50% 52%,
+    #fff6e8,
+    #ffd9b0 45%,
+    #f0a6b8 100%
+  );
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gift-blackout {
+  position: fixed;
+  inset: 0;
+
+  z-index: 61;
+
+  background: radial-gradient(
+    circle at center,
+    #160b18,
+    #030208 70%
+  );
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+  .gift-box {
+    width: 190px;
+    height: 210px;
+  }
+
+  .gift-lid {
+    width: 186px;
+    top: 40px;
+  }
+
+  .gift-lid-face {
+    height: 44px;
+  }
+
+  .gift-bow {
+    bottom: 40px;
+    width: 104px;
+    height: 50px;
+  }
+
+  .bow-loop {
+    width: 46px;
+    height: 38px;
+  }
+
+  .bow-tail-left { left: 34px; }
+  .bow-tail-right { right: 34px; }
+
+  .gift-body {
+    width: 160px;
+    height: 128px;
+  }
+
+  .gift-tag {
+    right: -18px;
+    font-size: 10px;
+  }
+
+  .gift-shadow {
+    width: 170px;
+  }
+
+  .gift-header {
+    margin-bottom: 30px;
+  }
+
+  .gift-prompt {
+    margin-top: 32px;
+    font-size: 11px;
+    letter-spacing: 3px;
+  }
+}

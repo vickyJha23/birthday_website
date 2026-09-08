@@ -23,6 +23,7 @@ import firework from "./assets/music/firework.mp3";
 import emotionalPiano from "./assets/music/emotional_piano.mp3";
 import dreamer from "./assets/music/dreamer.mp3";
 import SceneTransition from "./components/SceneTransition";
+import GiftBox from "./components/GiftBox";
 
 
 
@@ -49,7 +50,7 @@ const ONE_SHOT_TRACKS = new Set<string>([
 const CROSSFADE_MS = 1600;
 
 const App = () => {
-  const [scene, setScene] = useState<string>("hero");
+  const [scene, setScene] = useState<string>("gift");
   const [volume, setVolume] = useState(0.5);
   const [audio, setAudio] = useState<string>("");
   const [loop, setLoop] = useState<boolean>(true);
@@ -73,6 +74,19 @@ const App = () => {
         play={play}
         fadeDuration={CROSSFADE_MS}
       />
+      {scene === "gift" && (
+        <SceneTransition sceneKey="gift">
+          <GiftBox
+            onOpen={() => {
+              // Tapping the gift is the first gesture, so audio can start here
+              handleAudio(MUSIC_STORE.dreamer);
+              handlePlay(true);
+            }}
+            onComplete={() => setScene("hero")}
+          />
+        </SceneTransition>
+      )}
+
       {scene === "hero" && (
          <SceneTransition sceneKey="hero">
              <>
@@ -139,7 +153,7 @@ const App = () => {
 
       {scene === "final" && <SceneTransition sceneKey="final">
               <FinalScene onReplay={() => {
-        setScene("hero")
+        setScene("gift")
         handlePlay(false);
       }} />
           </SceneTransition>}
