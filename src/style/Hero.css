@@ -2,7 +2,11 @@
   position: relative;
   width: 100%;
   height: 100vh;
-  min-height: 700px;
+  height: 100dvh;
+
+  /* No fixed floor: a 700px minimum pushed the page past a short viewport and
+     was the one thing on the site producing a scrollbar. */
+  min-height: 0;
 
   overflow: hidden;
 
@@ -575,5 +579,110 @@
 
   .lanterns span {
     font-size: 20px;
+  }
+}
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  /* The roses are sized for a wide stage; at phone width they were 40% of the
+     screen each and buried the button. */
+  .flower-foreground {
+    height: 150px;
+    bottom: -10px;
+  }
+
+  .flower-foreground .rose-svg {
+    width: 78px;
+    height: 118px;
+  }
+
+  .rose-one   { left: -2%;  transform: scale(1) rotate(-12deg); }
+  .rose-two   { left: 20%;  transform: scale(.72) rotate(8deg); }
+  .rose-three { left: 42%;  transform: scale(1.05) rotate(-4deg); }
+  .rose-four  { left: 66%;  transform: scale(.8) rotate(10deg); }
+  .rose-five  { right: -4%; transform: scale(.95) rotate(-8deg); }
+
+  .hero-content {
+    margin-top: 0;
+    padding: 0 18px;
+  }
+
+  .begin-button {
+    padding: 14px 30px;
+    font-size: 14px;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .hero-subtitle {
+    font-size: 25px;
+  }
+}
+
+/* =========================
+   SHORT / LANDSCAPE PHONES
+========================= */
+
+/* A landscape phone is wide enough to miss the width queries above but far too
+   short for the full-size type, which ended up colliding with the navbar. */
+
+@media (max-height: 520px) {
+  .hero-content {
+    margin-top: 28px;
+  }
+
+  .hero-title {
+    font-size: 30px;
+  }
+
+  .hero-subtitle {
+    font-size: 24px;
+  }
+
+  .hero-description {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .hero-heart {
+    font-size: 20px;
+    margin: 8px 0;
+  }
+
+  .begin-button {
+    padding: 10px 24px;
+    font-size: 13px;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  .flower-foreground {
+    height: 120px;
+  }
+
+  .flower-foreground .rose-svg {
+    width: 66px;
+    height: 100px;
+  }
+
+  .moon {
+    width: 84px;
+    height: 84px;
+  }
+
+  .lanterns span {
+    font-size: 16px;
   }
 }

@@ -6,6 +6,15 @@
 html {
   scroll-behavior: smooth;
   user-select: none;
+
+  /* overflow-x on body alone does not catch everything - a fixed, full-screen
+     scene was still leaving the document a few pixels of sideways scroll.
+     clip does the job without turning html into a scroll container. */
+  overflow-x: hidden;
+  overflow-x: clip;
+
+  /* Stop iOS bumping up type in landscape */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -13,6 +22,28 @@ body {
   background: #090711;
   font-family: Arial, sans-serif;
   overflow-x: hidden;
+}
+
+/*
+ * Every scene fills the viewport, so a scrollbar is never something to steer
+ * by - it only ever appears on a short window and shunts the whole layout
+ * sideways as scenes come and go. Hide the chrome everywhere; scrolling itself
+ * still works, so nothing becomes unreachable on a very short screen.
+ */
+
+html,
+body,
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 button,

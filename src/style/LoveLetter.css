@@ -4,6 +4,7 @@
   inset: 0;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 
   display: flex;
@@ -769,5 +770,69 @@
 
   .letter-bottom {
     display: none;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+  /* Centre the envelope higher so the opened letter has room below it */
+  .envelope-wrapper {
+    margin-top: 20px;
+  }
+
+  /* The paper is opaque, so keeping it above the envelope stops the flap
+     showing through the letter while it opens */
+  .letter-paper {
+    z-index: 10;
+  }
+
+  .letter-content {
+    padding: 26px 22px;
+  }
+
+  .letter-continue {
+    bottom: 3vh;
+
+    padding: 12px 22px;
+    font-size: 12px;
+
+    /* Solid enough to stay readable if the letter ever reaches behind it */
+    background: rgba(24, 8, 18, 0.82);
+    border-color: rgba(255, 140, 180, 0.5);
+  }
+}
+
+/* The letter is longer than a phone screen, so it scrolls inside the paper.
+   Scrollbars are hidden site-wide, so fade the bottom edge to signal that
+   there is more, and keep the scroll from chaining to the page behind it. */
+
+.letter-content {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 700px) {
+  .letter-paper::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 46px;
+
+    border-radius: 0 0 4px 4px;
+
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(246, 234, 214, 0.92)
+    );
+
+    pointer-events: none;
   }
 }

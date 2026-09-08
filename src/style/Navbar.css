@@ -39,3 +39,61 @@
 .nav-links a:hover {
   color: white;
 }
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .navbar {
+    height: 62px;
+    padding: 0 18px;
+  }
+
+  /* Without this the two words stack and the bar grows to three lines */
+  .logo {
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  .nav-links {
+    gap: 14px;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .navbar {
+    padding: 0 12px;
+  }
+
+  .logo {
+    font-size: 15px;
+  }
+
+  .nav-links {
+    gap: 11px;
+  }
+
+  .nav-links a {
+    font-size: 10px;
+  }
+}
+
+@media (max-height: 520px) {
+  .navbar {
+    height: 48px;
+  }
+
+  .logo {
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+  }
+}

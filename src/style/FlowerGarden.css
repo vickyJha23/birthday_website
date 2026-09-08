@@ -456,7 +456,7 @@
   }
 
   .garden-content {
-    top: 23%;
+    top: 27%;
   }
 
   .garden-content h1 {
@@ -468,7 +468,7 @@
   }
 
   .garden-flowers {
-    height: 220px;
+    height: 265px;
   }
 
   .garden-rose {
@@ -486,5 +486,307 @@
     text-align: center;
 
     font-size: 8px;
+  }
+}
+/* =========================
+   SKY LAYER (parallax)
+========================= */
+
+.garden-sky-layer {
+  position: absolute;
+  inset: -20px;
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+/* =========================
+   SHOOTING STARS
+========================= */
+
+.garden-shooting {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+}
+
+.shooting-star {
+  position: absolute;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+  background: #fff;
+
+  box-shadow: 0 0 8px 2px rgba(255, 240, 220, .9);
+
+  opacity: 0;
+}
+
+/* The tail trails back up along the direction of travel */
+
+.shooting-star::after {
+  content: "";
+
+  position: absolute;
+  right: 2px;
+  top: 50%;
+
+  width: 90px;
+  height: 1.5px;
+
+  transform: translateY(-50%) rotate(-30.5deg);
+  transform-origin: right center;
+
+  background: linear-gradient(
+    270deg,
+    rgba(255, 245, 230, .85),
+    transparent
+  );
+}
+
+.shooting-one {
+  left: 12%;
+  top: 8%;
+}
+
+.shooting-two {
+  left: 58%;
+  top: 4%;
+}
+
+/* =========================
+   DISTANT FLOWERS
+========================= */
+
+.garden-far-flowers {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 280px;
+
+  /* Below the ground mound, so the stems disappear behind the hill */
+  z-index: 5;
+
+  filter: blur(1.6px) brightness(.55) saturate(.8);
+
+  pointer-events: none;
+}
+
+.garden-rose-far {
+  position: absolute;
+  bottom: 82px;
+
+  opacity: .75;
+  transform-origin: bottom center;
+}
+
+.rose-far-a { left: 9%;  transform: scale(.42) rotate(-7deg); }
+.rose-far-b { left: 23%; transform: scale(.36) rotate(6deg); }
+.rose-far-c { left: 38%; transform: scale(.46) rotate(-4deg); }
+.rose-far-d { left: 52%; transform: scale(.34) rotate(9deg); }
+.rose-far-e { right: 22%; transform: scale(.44) rotate(-8deg); }
+.rose-far-f { right: 8%;  transform: scale(.38) rotate(5deg); }
+
+/* =========================
+   BUTTERFLIES
+========================= */
+
+.garden-butterflies {
+  position: absolute;
+  inset: 0;
+
+  z-index: 8;
+
+  pointer-events: none;
+}
+
+.butterfly {
+  position: absolute;
+  left: 0;
+
+  width: 42px;
+  height: 32px;
+}
+
+/* Routed over the flowers and through the upper sky, clear of the headline */
+
+.butterfly-1 { top: 18%; }
+.butterfly-2 { top: 64%; transform: scale(.8); }
+.butterfly-3 { top: 73%; transform: scale(.62); }
+
+.butterfly .wing {
+  position: absolute;
+  top: 0;
+
+  width: 21px;
+  height: 32px;
+
+  animation: butterfly-flap .26s infinite alternate ease-in-out;
+}
+
+/* Each wing is an upper and a lower lobe, which is what makes the
+   silhouette read as a butterfly rather than a pair of blobs */
+
+.butterfly .wing::before,
+.butterfly .wing::after {
+  content: "";
+  position: absolute;
+
+  background: linear-gradient(
+    150deg,
+    #ffc7e2,
+    #ff77ad 55%,
+    #d63f7d
+  );
+
+  box-shadow: 0 0 16px rgba(255, 110, 170, .75);
+}
+
+.butterfly .wing::before {
+  top: 0;
+  width: 21px;
+  height: 19px;
+}
+
+.butterfly .wing::after {
+  bottom: 0;
+  width: 15px;
+  height: 14px;
+
+  opacity: .9;
+}
+
+.butterfly .wing-left {
+  left: 0;
+  transform-origin: right center;
+}
+
+.butterfly .wing-left::before {
+  left: 0;
+  border-radius: 75% 25% 30% 60%;
+}
+
+.butterfly .wing-left::after {
+  right: 0;
+  border-radius: 50% 20% 45% 60%;
+}
+
+.butterfly .wing-right {
+  right: 0;
+  transform-origin: left center;
+  animation-delay: -.02s;
+}
+
+.butterfly .wing-right::before {
+  right: 0;
+  border-radius: 25% 75% 60% 30%;
+}
+
+.butterfly .wing-right::after {
+  left: 0;
+  border-radius: 20% 50% 60% 45%;
+}
+
+.butterfly .butterfly-body {
+  position: absolute;
+
+  left: 50%;
+  top: 5px;
+
+  width: 3.5px;
+  height: 23px;
+
+  transform: translateX(-50%);
+
+  border-radius: 2px;
+  background: #6a2440;
+
+  z-index: 2;
+}
+
+@keyframes butterfly-flap {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(.55);
+  }
+}
+
+/* =========================
+   FOREGROUND GRASS
+========================= */
+
+.garden-foreground-grass {
+  position: absolute;
+
+  left: -3%;
+  bottom: 0;
+
+  width: 106%;
+  height: 150px;
+
+  /* In front of the flowers, so the garden has something to look past */
+  z-index: 9;
+
+  pointer-events: none;
+}
+
+.garden-foreground-grass span {
+  position: absolute;
+  bottom: 0;
+
+  width: 14px;
+  height: 70px;
+
+  border-radius: 50% 50% 0 0 / 90% 90% 0 0;
+
+  background: linear-gradient(
+    to top,
+    #050c07,
+    rgba(12, 32, 18, .85) 60%,
+    rgba(24, 56, 32, .35)
+  );
+
+  transform-origin: bottom center;
+}
+
+.garden-foreground-grass span:nth-child(1)  { left: 1%;   height: 86px; }
+.garden-foreground-grass span:nth-child(2)  { left: 7%;   height: 58px; width: 10px; }
+.garden-foreground-grass span:nth-child(3)  { left: 12%;  height: 104px; }
+.garden-foreground-grass span:nth-child(4)  { left: 18%;  height: 64px; width: 11px; }
+.garden-foreground-grass span:nth-child(5)  { left: 24%;  height: 92px; }
+.garden-foreground-grass span:nth-child(6)  { left: 30%;  height: 52px; width: 9px; }
+.garden-foreground-grass span:nth-child(7)  { left: 36%;  height: 110px; width: 16px; }
+.garden-foreground-grass span:nth-child(8)  { left: 42%;  height: 68px; }
+.garden-foreground-grass span:nth-child(9)  { left: 48%;  height: 88px; width: 12px; }
+.garden-foreground-grass span:nth-child(10) { left: 54%;  height: 56px; width: 10px; }
+.garden-foreground-grass span:nth-child(11) { left: 60%;  height: 98px; }
+.garden-foreground-grass span:nth-child(12) { left: 66%;  height: 72px; width: 11px; }
+.garden-foreground-grass span:nth-child(13) { left: 72%;  height: 116px; width: 15px; }
+.garden-foreground-grass span:nth-child(14) { left: 78%;  height: 60px; }
+.garden-foreground-grass span:nth-child(15) { left: 84%;  height: 94px; width: 13px; }
+.garden-foreground-grass span:nth-child(16) { left: 89%;  height: 66px; width: 10px; }
+.garden-foreground-grass span:nth-child(17) { left: 94%;  height: 102px; }
+.garden-foreground-grass span:nth-child(18) { left: 99%;  height: 74px; width: 12px; }
+
+@media (max-width: 600px) {
+  .garden-foreground-grass {
+    height: 110px;
+  }
+
+  .garden-foreground-grass span {
+    width: 10px;
+  }
+
+  .garden-rose-far {
+    bottom: 70px;
   }
 }

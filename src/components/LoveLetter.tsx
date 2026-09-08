@@ -15,6 +15,7 @@ const LoveLetter = ({ onComplete, handleAudio }: LoveLetterProps) => {
   const flapRef = useRef<HTMLDivElement | null>(null);
   const paperRef = useRef<HTMLDivElement | null>(null);
   const sealRef = useRef<HTMLDivElement | null>(null);
+  const envelopeBodyRef = useRef<HTMLDivElement | null>(null);
   const promptRef = useRef<HTMLDivElement | null>(null);
   const letterContentRef = useRef<HTMLDivElement | null>(null);
   const continueRef = useRef<HTMLButtonElement | null>(null);
@@ -154,17 +155,32 @@ const LoveLetter = ({ onComplete, handleAudio }: LoveLetterProps) => {
       "-=1"
     );
 
-    // Expand paper
+    // Expand paper. On a phone the letter has to leave room for the continue
+    // button underneath it, so it opens shorter and sits higher.
+    const narrow = window.innerWidth <= 700;
+
     tl.to(
       paperRef.current,
       {
-        width: "min(680px, 88vw)",
-        height: "min(720px, 78vh)",
-        y: -30,
+        width: narrow ? "92vw" : "min(680px, 88vw)",
+        height: narrow ? "64vh" : "min(720px, 78vh)",
+        y: narrow ? -46 : -30,
         duration: 1.3,
         ease: "power3.inOut",
       },
       "-=.5"
+    );
+
+    // Once the paper is out and open, the envelope behind it is just clutter -
+    // at narrow widths it showed straight through the middle of the text.
+    tl.to(
+      envelopeBodyRef.current,
+      {
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "-=.9"
     );
 
     // Reveal letter
@@ -299,7 +315,7 @@ const LoveLetter = ({ onComplete, handleAudio }: LoveLetterProps) => {
         </div>
 
         {/* Envelope */}
-        <div className="envelope">
+        <div ref={envelopeBodyRef} className="envelope">
           <div className="envelope-back" />
 
           <div className="envelope-front">
