@@ -38,26 +38,41 @@ export const MUSIC_STORE = {
    dreamer: dreamer
 }
 
+// Short one-shots that are timed to what's on screen; everything else is a
+// looping bed so a scene never falls into silence mid-way.
+const ONE_SHOT_TRACKS = new Set<string>([
+  MUSIC_STORE.letterOpening,
+  MUSIC_STORE.countDown,
+]);
+
+// How long one track takes to hand over to the next
+const CROSSFADE_MS = 1600;
+
 const App = () => {
   const [scene, setScene] = useState<string>("hero");
   const [volume, setVolume] = useState(0.5);
   const [audio, setAudio] = useState<string>("");
-  const [loop, setLoop] = useState<boolean>(false);
+  const [loop, setLoop] = useState<boolean>(true);
   const [play, setPlay] = useState<boolean>(false);
 
   const handleAudio = (src: string) => {
     setAudio(src);
+    setLoop(!ONE_SHOT_TRACKS.has(src));
   };
-  const handleVolume = (vol: number) => {
-    setVolume(vol);
-  };
+  
   const handlePlay = (ply:boolean) => {
     setPlay(ply);
   };
 
   return (
     <main className="">
-      <AudioManager volume={volume} audio={audio} loop={loop} play={play} />
+      <AudioManager
+        volume={volume}
+        audio={audio}
+        loop={loop}
+        play={play}
+        fadeDuration={CROSSFADE_MS}
+      />
       {scene === "hero" && (
          <SceneTransition sceneKey="hero">
              <>

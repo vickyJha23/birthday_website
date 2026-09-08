@@ -20,6 +20,7 @@ const LoveLetter = ({ onComplete, handleAudio }: LoveLetterProps) => {
   const continueRef = useRef<HTMLButtonElement | null>(null);
 
   const [opened, setOpened] = useState<boolean>(false);
+  const scoreTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -65,6 +66,10 @@ const LoveLetter = ({ onComplete, handleAudio }: LoveLetterProps) => {
 
     return () => {
       ctx.revert();
+      // Don't let the letter's music cue land after the scene is gone
+      if (scoreTimerRef.current !== null) {
+        window.clearTimeout(scoreTimerRef.current);
+      }
     };
   }, []);
 
@@ -73,11 +78,11 @@ const LoveLetter = ({ onComplete, handleAudio }: LoveLetterProps) => {
 
     setOpened(true);
     handleAudio(MUSIC_STORE.letterOpening);
-    setTimeout(() => {
+    // The opening sound tails off as the piano bed rises under it
+    scoreTimerRef.current = window.setTimeout(() => {
+      scoreTimerRef.current = null;
       handleAudio(MUSIC_STORE.emotionalPiano);
-    }, 4000)
-   
-    
+    }, 4000);
 
     const tl = gsap.timeline();
 
