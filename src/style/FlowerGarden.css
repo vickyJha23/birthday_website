@@ -1,0 +1,490 @@
+.garden-scene {
+  position: fixed;
+  inset: 0;
+
+  overflow: hidden;
+
+  background: #05030d;
+
+  color: white;
+}
+
+/* =========================
+   SKY
+========================= */
+
+.garden-sky {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(90, 35, 100, .25),
+      transparent 35%
+    ),
+    linear-gradient(
+      to bottom,
+      #080516 0%,
+      #0c071b 45%,
+      #13091b 75%,
+      #07030c 100%
+    );
+}
+
+/* =========================
+   MOON
+========================= */
+
+.garden-moon {
+  position: absolute;
+
+  top: 9%;
+  right: 12%;
+
+  width: 110px;
+  height: 110px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #fff,
+      #ffeef5 45%,
+      #f2cbdc 100%
+    );
+
+  box-shadow:
+    0 0 30px rgba(255, 230, 240, .5),
+    0 0 100px rgba(255, 150, 190, .25);
+
+  z-index: 2;
+}
+
+.garden-moon-glow {
+  position: absolute;
+
+  inset: -70px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 190, 220, .18),
+      transparent 65%
+    );
+}
+
+/* =========================
+   STARS
+========================= */
+
+.garden-stars {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+}
+
+.garden-stars span {
+  position: absolute;
+
+  width: 2px;
+  height: 2px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  opacity: .6;
+
+  animation:
+    gardenTwinkle
+    3s ease-in-out infinite alternate;
+}
+
+.garden-stars span:nth-child(3n) {
+  width: 3px;
+  height: 3px;
+}
+
+.garden-stars span:nth-child(1) {
+  left: 8%;
+  top: 20%;
+}
+
+.garden-stars span:nth-child(2) {
+  left: 17%;
+  top: 35%;
+}
+
+.garden-stars span:nth-child(3) {
+  left: 29%;
+  top: 15%;
+}
+
+.garden-stars span:nth-child(4) {
+  left: 41%;
+  top: 28%;
+}
+
+.garden-stars span:nth-child(5) {
+  left: 53%;
+  top: 12%;
+}
+
+.garden-stars span:nth-child(6) {
+  left: 67%;
+  top: 32%;
+}
+
+.garden-stars span:nth-child(7) {
+  left: 79%;
+  top: 18%;
+}
+
+.garden-stars span:nth-child(8) {
+  left: 90%;
+  top: 30%;
+}
+
+@keyframes gardenTwinkle {
+  from {
+    opacity: .2;
+  }
+
+  to {
+    opacity: .9;
+  }
+}
+
+/* =========================
+   FIREFLIES
+========================= */
+
+.fireflies {
+  position: absolute;
+  inset: 0;
+
+  z-index: 4;
+
+  pointer-events: none;
+}
+
+.fireflies span {
+  position: absolute;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #ffe89b;
+
+  box-shadow:
+    0 0 8px #ffe89b,
+    0 0 20px rgba(255, 220, 120, .8);
+
+  opacity: .6;
+}
+
+.fireflies span:nth-child(1) {
+  left: 8%;
+  top: 70%;
+}
+
+.fireflies span:nth-child(2) {
+  left: 15%;
+  top: 58%;
+}
+
+.fireflies span:nth-child(3) {
+  left: 24%;
+  top: 75%;
+}
+
+.fireflies span:nth-child(4) {
+  left: 34%;
+  top: 63%;
+}
+
+.fireflies span:nth-child(5) {
+  left: 44%;
+  top: 72%;
+}
+
+.fireflies span:nth-child(6) {
+  left: 56%;
+  top: 61%;
+}
+
+.fireflies span:nth-child(7) {
+  left: 67%;
+  top: 75%;
+}
+
+.fireflies span:nth-child(8) {
+  left: 77%;
+  top: 58%;
+}
+
+.fireflies span:nth-child(9) {
+  left: 88%;
+  top: 68%;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.garden-content {
+  position: absolute;
+
+  top: 25%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 90%;
+
+  text-align: center;
+
+  z-index: 10;
+}
+
+.garden-eyebrow {
+  margin: 0 0 15px;
+
+  font-size: 12px;
+
+  letter-spacing: 5px;
+
+  text-transform: uppercase;
+
+  color: rgba(255,255,255,.5);
+}
+
+.garden-content h1 {
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(45px, 7vw, 90px);
+
+  font-weight: 400;
+
+  color: #fff;
+}
+
+.garden-content h1 span {
+  color: #ff6b9f;
+
+  text-shadow:
+    0 0 20px rgba(255, 80, 150, .7);
+}
+
+.garden-description {
+  margin-top: 25px;
+
+  font-family: Georgia, serif;
+
+  font-size: 18px;
+
+  line-height: 1.8;
+
+  font-style: italic;
+
+  color: rgba(255,255,255,.6);
+}
+
+/* =========================
+   FLOWERS
+========================= */
+
+.garden-flowers {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 280px;
+
+  z-index: 7;
+
+  pointer-events: none;
+}
+
+.garden-rose {
+  position: absolute;
+
+  bottom: 15px;
+
+  transform-origin: bottom center;
+}
+
+.rose-a {
+  left: 3%;
+  transform: scale(.9) rotate(-10deg);
+}
+
+.rose-b {
+  left: 16%;
+  transform: scale(.7) rotate(8deg);
+}
+
+.rose-c {
+  left: 29%;
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.rose-d {
+  left: 43%;
+  transform: scale(.85);
+}
+
+.rose-e {
+  left: 56%;
+  transform: scale(1.3) rotate(6deg);
+}
+
+.rose-f {
+  right: 17%;
+  transform: scale(.8) rotate(-8deg);
+}
+
+.rose-g {
+  right: 3%;
+  transform: scale(1.05) rotate(10deg);
+}
+
+/* =========================
+   GROUND
+========================= */
+
+.garden-ground {
+  position: absolute;
+
+  left: -5%;
+  bottom: -70px;
+
+  width: 110%;
+  height: 170px;
+
+  border-radius: 50% 50% 0 0;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      #142719,
+      #071009 70%
+    );
+
+  z-index: 6;
+
+  box-shadow:
+    0 -20px 50px
+    rgba(20, 70, 40, .2);
+}
+
+/* grass */
+.grass {
+  position: absolute;
+
+  bottom: 100px;
+
+  width: 80px;
+  height: 80px;
+
+  border-left: 2px solid rgba(80,130,80,.4);
+
+  transform: rotate(25deg);
+}
+
+.grass-one {
+  left: 20%;
+}
+
+.grass-two {
+  left: 65%;
+
+  transform: rotate(-20deg);
+}
+
+.grass-three {
+  right: 15%;
+}
+
+/* =========================
+   BOTTOM TEXT
+========================= */
+
+.garden-bottom {
+  position: absolute;
+
+  bottom: 25px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  z-index: 15;
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+
+  color: rgba(255,255,255,.3);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .garden-moon {
+    width: 75px;
+    height: 75px;
+
+    top: 8%;
+    right: 8%;
+  }
+
+  .garden-content {
+    top: 23%;
+  }
+
+  .garden-content h1 {
+    font-size: 48px;
+  }
+
+  .garden-description {
+    font-size: 15px;
+  }
+
+  .garden-flowers {
+    height: 220px;
+  }
+
+  .garden-rose {
+    width: 80px;
+  }
+
+  .rose-b,
+  .rose-f {
+    display: none;
+  }
+
+  .garden-bottom {
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 8px;
+  }
+}

@@ -1,0 +1,583 @@
+.memory-scene {
+  position: fixed;
+  inset: 0;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: #06040d;
+
+  color: white;
+
+  touch-action: pan-y;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.memory-background {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(98, 29, 74, .25),
+      transparent 40%
+    ),
+    linear-gradient(
+      180deg,
+      #090617,
+      #120817 60%,
+      #05030a
+    );
+}
+
+.memory-glow {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  top: 35%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 80, 160, .1),
+      transparent 70%
+    );
+
+  filter: blur(30px);
+}
+
+/* =========================
+   STARS
+========================= */
+
+.memory-stars {
+  position: absolute;
+  inset: 0;
+}
+
+.memory-stars span {
+  position: absolute;
+
+  width: 2px;
+  height: 2px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  opacity: .4;
+
+  animation:
+    memoryTwinkle
+    3s ease-in-out infinite alternate;
+}
+
+@keyframes memoryTwinkle {
+  from {
+    opacity: .15;
+  }
+
+  to {
+    opacity: .8;
+  }
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.memory-header {
+  position: relative;
+
+  z-index: 10;
+
+  margin-top: 10vh;
+
+  text-align: center;
+}
+
+.memory-header p {
+  margin: 0 0 12px;
+
+  font-size: 11px;
+
+  letter-spacing: 6px;
+
+  color: rgba(255,255,255,.4);
+}
+
+.memory-header h1 {
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(38px, 5vw, 65px);
+
+  font-weight: 400;
+}
+
+.memory-header h1 span {
+  color: #ff6a9f;
+}
+
+.memory-header > span {
+  color: rgba(255,255,255,.5);
+
+  font-family: Georgia, serif;
+
+  font-size: 15px;
+}
+
+.memory-line {
+  width: 55px;
+  height: 1px;
+
+  margin: 20px auto;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.6),
+      transparent
+    );
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.memory-cards {
+  position: absolute;
+
+  top: 51%;
+  left: 50%;
+
+  width: 300px;
+  height: 390px;
+
+  transform:
+    translate(-50%, -50%);
+
+  perspective: 1200px;
+
+  opacity: 0;
+}
+
+.memory-card {
+  position: absolute;
+
+  width: 300px;
+  height: 390px;
+
+  padding: 12px;
+
+  border-radius: 5px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff,
+      #f2edf0
+    );
+
+  box-shadow:
+    0 30px 70px
+    rgba(0,0,0,.5);
+
+  cursor: pointer;
+
+  color: #241720;
+
+  transform-style: preserve-3d;
+
+  user-select: none;
+}
+
+.photo-frame {
+  position: relative;
+
+  width: 100%;
+  height: 305px;
+
+  overflow: hidden;
+
+  background: #ddd;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  transition:
+    transform .8s ease;
+}
+
+.memory-card:hover
+.photo-frame img {
+  transform: scale(1.05);
+}
+
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 65%,
+      rgba(0,0,0,.2)
+    );
+}
+
+.memory-card-info {
+  padding: 13px 5px 5px;
+}
+
+.memory-card-info small {
+  display: block;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  color: #9b7183;
+}
+
+.memory-card-info h2 {
+  margin: 5px 0 0;
+
+  font-family: Georgia, serif;
+
+  font-size: 18px;
+
+  font-weight: 400;
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+.memory-controls {
+  position: absolute;
+
+  bottom: 8vh;
+
+  z-index: 20;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+.memory-controls button {
+  width: 45px;
+  height: 45px;
+
+  border-radius: 50%;
+
+  border: 1px solid
+    rgba(255,255,255,.2);
+
+  background:
+    rgba(255,255,255,.05);
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.memory-controls button:hover {
+  background:
+    rgba(255,255,255,.12);
+
+  transform: scale(1.05);
+}
+
+.memory-progress {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.memory-progress span {
+  font-size: 10px;
+
+  color: rgba(255,255,255,.5);
+
+  letter-spacing: 1px;
+}
+
+.memory-progress > div {
+  width: 100px;
+  height: 1px;
+
+  background:
+    rgba(255,255,255,.15);
+}
+
+.memory-progress i {
+  display: block;
+
+  height: 100%;
+
+  background: white;
+
+  transition: width .5s ease;
+}
+
+/* =========================
+   CONTINUE
+========================= */
+
+.memory-continue {
+  position: absolute;
+
+  right: 5vw;
+  bottom: 7.5vh;
+
+  z-index: 20;
+
+  border: none;
+
+  background: transparent;
+
+  color: rgba(255,255,255,.7);
+
+  font-size: 11px;
+
+  letter-spacing: 2px;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.memory-continue span {
+  margin-left: 8px;
+
+  transition: .3s;
+}
+
+.memory-continue:hover {
+  color: white;
+}
+
+.memory-continue:hover span {
+  margin-left: 14px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.memory-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 100;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background:
+    rgba(3,2,8,.9);
+
+  backdrop-filter: blur(15px);
+}
+
+.memory-modal-content {
+  position: relative;
+
+  width: min(900px, 95vw);
+
+  max-height: 90vh;
+
+  display: grid;
+
+  grid-template-columns:
+    1.3fr .7fr;
+
+  background:
+    #100b13;
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+  box-shadow:
+    0 40px 100px
+    rgba(0,0,0,.7);
+}
+
+.memory-modal-content > img {
+  width: 100%;
+  height: 75vh;
+
+  object-fit: cover;
+}
+
+.modal-text {
+  padding: 50px 35px;
+
+  align-self: center;
+}
+
+.modal-text small {
+  color: #bd7998;
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+}
+
+.modal-text h2 {
+  margin: 15px 0;
+
+  font-family: Georgia, serif;
+
+  font-size: 35px;
+
+  font-weight: 400;
+}
+
+.modal-text p {
+  color: rgba(255,255,255,.6);
+
+  font-family: Georgia, serif;
+
+  line-height: 1.8;
+}
+
+.modal-close {
+  position: absolute;
+
+  top: 15px;
+  right: 15px;
+
+  z-index: 5;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  border: 1px solid
+    rgba(255,255,255,.2);
+
+  background:
+    rgba(0,0,0,.4);
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .memory-header {
+    margin-top: 8vh;
+  }
+
+  .memory-header h1 {
+    font-size: 38px;
+  }
+
+  .memory-header > span {
+    font-size: 13px;
+  }
+
+  .memory-cards {
+    top: 53%;
+
+    width: 250px;
+    height: 330px;
+  }
+
+  .memory-card {
+    width: 250px;
+    height: 330px;
+  }
+
+  .photo-frame {
+    height: 250px;
+  }
+
+  .memory-card-info h2 {
+    font-size: 16px;
+  }
+
+  .memory-controls {
+    bottom: 8vh;
+  }
+
+  .memory-continue {
+    right: auto;
+    bottom: 3vh;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    white-space: nowrap;
+  }
+
+  .memory-modal-content {
+    display: block;
+
+    max-height: 85vh;
+  }
+
+  .memory-modal-content > img {
+    height: 50vh;
+  }
+
+  .modal-text {
+    padding: 20px;
+  }
+
+  .modal-text h2 {
+    font-size: 25px;
+  }
+}

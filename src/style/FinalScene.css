@@ -1,0 +1,631 @@
+.final-scene {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(150, 25, 80, 0.18),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(90, 20, 90, 0.15),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      #030207,
+      #0d050d,
+      #030207
+    );
+
+  color: white;
+}
+
+/* =========================
+   NOISE
+========================= */
+
+.final-noise {
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.05;
+
+  pointer-events: none;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+
+  z-index: 1;
+}
+
+/* =========================
+   STARS
+========================= */
+
+.final-stars {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+.final-stars span {
+  position: absolute;
+
+  width: 2px;
+  height: 2px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  opacity: 0.4;
+
+  animation:
+    finalStarPulse
+    3s ease-in-out infinite
+    alternate;
+}
+
+.final-stars span:nth-child(1) {
+  left: 7%;
+  top: 15%;
+}
+
+.final-stars span:nth-child(2) {
+  left: 15%;
+  top: 40%;
+}
+
+.final-stars span:nth-child(3) {
+  left: 25%;
+  top: 12%;
+}
+
+.final-stars span:nth-child(4) {
+  left: 35%;
+  top: 28%;
+}
+
+.final-stars span:nth-child(5) {
+  left: 48%;
+  top: 10%;
+}
+
+.final-stars span:nth-child(6) {
+  left: 62%;
+  top: 20%;
+}
+
+.final-stars span:nth-child(7) {
+  left: 75%;
+  top: 13%;
+}
+
+.final-stars span:nth-child(8) {
+  left: 88%;
+  top: 30%;
+}
+
+.final-stars span:nth-child(9) {
+  left: 92%;
+  top: 60%;
+}
+
+.final-stars span:nth-child(10) {
+  left: 12%;
+  top: 70%;
+}
+
+.final-stars span:nth-child(11) {
+  left: 30%;
+  top: 80%;
+}
+
+.final-stars span:nth-child(12) {
+  left: 70%;
+  top: 75%;
+}
+
+.final-stars span:nth-child(13) {
+  left: 82%;
+  top: 82%;
+}
+
+.final-stars span:nth-child(3n) {
+  width: 3px;
+  height: 3px;
+
+  opacity: 0.7;
+}
+
+@keyframes finalStarPulse {
+  from {
+    opacity: 0.2;
+
+    transform: scale(0.7);
+  }
+
+  to {
+    opacity: 0.9;
+
+    transform: scale(1.3);
+  }
+}
+
+/* =========================
+   GLOW
+========================= */
+
+.final-glow {
+  position: absolute;
+
+  width: 650px;
+  height: 650px;
+
+  left: 50%;
+  top: 48%;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 50, 130, 0.14),
+      rgba(150, 30, 100, 0.06) 35%,
+      transparent 70%
+    );
+
+  filter: blur(25px);
+
+  animation:
+    finalGlowPulse
+    5s ease-in-out infinite;
+}
+
+@keyframes finalGlowPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1.12);
+  }
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.final-content {
+  position: relative;
+
+  z-index: 10;
+
+  width: min(800px, 90vw);
+
+  text-align: center;
+}
+
+/* =========================
+   SMALL TEXT
+========================= */
+
+.final-small {
+  margin-bottom: 30px;
+
+  font-family: Georgia, serif;
+
+  font-size: 15px;
+
+  font-style: italic;
+
+  letter-spacing: 2px;
+
+  color:
+    rgba(
+      255,
+      220,
+      235,
+      0.55
+    );
+}
+
+/* =========================
+   HEART
+========================= */
+
+.final-heart {
+  width: 90px;
+  height: 90px;
+
+  margin: 0 auto 22px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 75px;
+
+  line-height: 1;
+
+  color: #ff4f91;
+
+  text-shadow:
+    0 0 10px
+    rgba(255, 50, 130, 0.8),
+
+    0 0 30px
+    rgba(255, 50, 130, 0.5),
+
+    0 0 70px
+    rgba(255, 50, 130, 0.25);
+
+  transform-origin: center;
+}
+
+/* =========================
+   LABEL
+========================= */
+
+.final-label {
+  margin: 0 0 10px;
+
+  font-size: 11px;
+
+  letter-spacing: 5px;
+
+  text-transform: uppercase;
+
+  color:
+    rgba(
+      255,
+      190,
+      215,
+      0.5
+    );
+}
+
+/* =========================
+   NAME
+========================= */
+
+.final-content h1 {
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(
+    55px,
+    9vw,
+    115px
+  );
+
+  line-height: 1;
+
+  font-weight: 400;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #ffc4d8 40%,
+      #e44d84 75%,
+      #9e2455 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  filter:
+    drop-shadow(
+      0 0 25px
+      rgba(
+        255,
+        80,
+        150,
+        0.3
+      )
+    );
+}
+
+/* =========================
+   LINE
+========================= */
+
+.final-line {
+  width: 100px;
+  height: 1px;
+
+  margin: 30px auto;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(
+        255,
+        120,
+        170,
+        0.7
+      ),
+      transparent
+    );
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+.final-message {
+  width: min(650px, 90vw);
+
+  margin: 0 auto;
+
+  min-height: 90px;
+
+  font-family: Georgia, serif;
+
+  font-size: 18px;
+
+  line-height: 1.9;
+
+  color:
+    rgba(
+      255,
+      235,
+      242,
+      0.78
+    );
+}
+
+.cursor {
+  display: inline-block;
+
+  margin-left: 3px;
+
+  color: #ff79aa;
+
+  animation:
+    cursorBlink
+    0.8s infinite;
+}
+
+@keyframes cursorBlink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* =========================
+   SIGNATURE
+========================= */
+
+.final-signature {
+  margin: 20px 0 30px;
+
+  font-family: Georgia, serif;
+
+  font-size: 17px;
+
+  font-style: italic;
+
+  color:
+    rgba(
+      255,
+      170,
+      200,
+      0.65
+    );
+}
+
+/* =========================
+   REPLAY BUTTON
+========================= */
+
+.replay-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 14px 25px;
+
+  border-radius: 30px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      130,
+      175,
+      0.3
+    );
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.05
+    );
+
+  backdrop-filter: blur(12px);
+
+  color: white;
+
+  font-size: 13px;
+
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+
+  transition:
+    0.3s ease;
+}
+
+.replay-button span {
+  font-size: 21px;
+
+  color: #ff80ae;
+
+  transition:
+    transform 0.4s ease;
+}
+
+.replay-button:hover {
+  background:
+    rgba(
+      255,
+      80,
+      140,
+      0.12
+    );
+
+  border-color:
+    rgba(
+      255,
+      140,
+      185,
+      0.65
+    );
+
+  transform:
+    translateY(-3px);
+}
+
+.replay-button:hover span {
+  transform:
+    rotate(-360deg);
+}
+
+/* =========================
+   BOTTOM
+========================= */
+
+.final-bottom {
+  position: absolute;
+
+  bottom: 22px;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  z-index: 10;
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.25
+    );
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .final-small {
+    font-size: 13px;
+
+    margin-bottom: 22px;
+  }
+
+  .final-heart {
+    width: 65px;
+    height: 65px;
+
+    font-size: 55px;
+
+    margin-bottom: 18px;
+  }
+
+  .final-label {
+    font-size: 9px;
+
+    letter-spacing: 3px;
+  }
+
+  .final-content h1 {
+    font-size: 55px;
+  }
+
+  .final-line {
+    margin: 22px auto;
+  }
+
+  .final-message {
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    min-height: 100px;
+  }
+
+  .final-signature {
+    font-size: 15px;
+  }
+
+  .final-glow {
+    width: 350px;
+    height: 350px;
+  }
+
+  .final-bottom {
+    bottom: 15px;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+  }
+}

@@ -1,0 +1,395 @@
+
+.birthday-reveal {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  overflow: hidden;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(150, 30, 80, 0.2),
+      transparent 45%
+    ),
+    linear-gradient(
+      180deg,
+      #05030a,
+      #110610,
+      #040208
+    );
+
+  color: white;
+}
+
+/* =========================
+   GLOW
+========================= */
+
+.reveal-glow {
+  position: absolute;
+
+  width: 650px;
+  height: 650px;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 50, 130, 0.18),
+      transparent 68%
+    );
+
+  filter: blur(30px);
+
+  animation:
+    revealGlow
+    5s ease-in-out infinite;
+}
+
+@keyframes revealGlow {
+  0%,
+  100% {
+    transform:
+      translate(-50%, -50%)
+      scale(0.9);
+
+    opacity: 0.5;
+  }
+
+  50% {
+    transform:
+      translate(-50%, -50%)
+      scale(1.1);
+
+    opacity: 1;
+  }
+}
+
+/* =========================
+   STARS
+========================= */
+
+.reveal-stars {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+}
+
+.reveal-stars span {
+  position: absolute;
+
+  width: 2px;
+  height: 2px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  opacity: 0.5;
+}
+
+.reveal-stars span:nth-child(1) {
+  left: 8%;
+  top: 15%;
+}
+
+.reveal-stars span:nth-child(2) {
+  left: 17%;
+  top: 35%;
+}
+
+.reveal-stars span:nth-child(3) {
+  left: 28%;
+  top: 12%;
+}
+
+.reveal-stars span:nth-child(4) {
+  left: 40%;
+  top: 25%;
+}
+
+.reveal-stars span:nth-child(5) {
+  left: 53%;
+  top: 10%;
+}
+
+.reveal-stars span:nth-child(6) {
+  left: 67%;
+  top: 20%;
+}
+
+.reveal-stars span:nth-child(7) {
+  left: 80%;
+  top: 14%;
+}
+
+.reveal-stars span:nth-child(8) {
+  left: 91%;
+  top: 35%;
+}
+
+.reveal-stars span:nth-child(3n) {
+  width: 3px;
+  height: 3px;
+}
+
+/* =========================
+   PETALS
+========================= */
+
+.reveal-petals {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 4;
+}
+
+.reveal-petals span {
+  position: absolute;
+
+  top: -50px;
+
+  font-size: 18px;
+
+  filter:
+    drop-shadow(
+      0 0 5px
+      rgba(255, 80, 150, 0.4)
+    );
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.reveal-content {
+  position: relative;
+
+  z-index: 10;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+}
+
+/* =========================
+   HEART
+========================= */
+
+.heart-svg {
+  width: min(
+    430px,
+    65vw
+  );
+
+  height: auto;
+
+  overflow: visible;
+
+  margin-bottom: -55px;
+
+  pointer-events: none;
+}
+
+.heart-svg path {
+  fill: none;
+
+  stroke:
+    rgba(
+      255,
+      105,
+      165,
+      0.9
+    );
+
+  stroke-width: 3;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  stroke-dasharray: 1000;
+
+  filter:
+    drop-shadow(
+      0 0 12px
+      rgba(
+        255,
+        70,
+        150,
+        0.6
+      )
+    );
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.reveal-title {
+  position: relative;
+
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(
+    25px,
+    3vw,
+    42px
+  );
+
+  font-weight: 400;
+
+  letter-spacing: 3px;
+
+  color:
+    rgba(
+      255,
+      225,
+      235,
+      0.85
+    );
+}
+
+/* =========================
+   NAME
+========================= */
+
+.reveal-name {
+  position: relative;
+
+  margin: 12px 0 0;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(
+    60px,
+    9vw,
+    120px
+  );
+
+  line-height: 1;
+
+  font-weight: 400;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #ffc0d7 45%,
+      #e54b83 80%,
+      #a62556
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  filter:
+    drop-shadow(
+      0 0 25px
+      rgba(
+        255,
+        80,
+        150,
+        0.35
+      )
+    );
+}
+
+.reveal-name span {
+  display: inline-block;
+
+  margin-left: 12px;
+
+  font-size: 0.35em;
+
+  vertical-align: middle;
+
+  color: #ff78aa;
+
+  -webkit-text-fill-color: #ff78aa;
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+.reveal-message {
+  margin: 25px 0 0;
+
+  font-family: Georgia, serif;
+
+  font-size: 16px;
+
+  font-style: italic;
+
+  letter-spacing: 1px;
+
+  color:
+    rgba(
+      255,
+      225,
+      235,
+      0.7
+    );
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .heart-svg {
+    width: 330px;
+
+    margin-bottom: -45px;
+  }
+
+  .reveal-title {
+    font-size: 22px;
+
+    letter-spacing: 2px;
+  }
+
+  .reveal-name {
+    font-size: 58px;
+  }
+
+  .reveal-message {
+    width: 85vw;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+  }
+}

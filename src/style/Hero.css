@@ -1,0 +1,579 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #080711;
+
+  color: white;
+}
+
+/* =========================
+   SKY
+========================= */
+
+.sky {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(120, 65, 140, 0.35),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      #05040b 0%,
+      #111026 45%,
+      #211329 75%,
+      #090711 100%
+    );
+}
+
+/* =========================
+   MOON
+========================= */
+
+.moon {
+  position: absolute;
+
+  width: 170px;
+  height: 170px;
+
+  top: 12%;
+  right: 17%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #fffdf8,
+      #eee1d5 60%,
+      #c9b7b2
+    );
+
+  box-shadow:
+    0 0 30px rgba(255, 240, 235, 0.35),
+    0 0 100px rgba(255, 170, 210, 0.18);
+
+  z-index: 2;
+}
+
+.moon-glow {
+  position: absolute;
+
+  inset: -30px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 180, 220, 0.08);
+
+  filter: blur(20px);
+}
+
+/* =========================
+   MOUNTAINS
+========================= */
+
+.mountains {
+  position: absolute;
+
+  bottom: 25%;
+
+  width: 120%;
+  height: 30%;
+
+  left: -10%;
+
+  clip-path: polygon(
+    0 100%,
+    10% 60%,
+    18% 75%,
+    30% 35%,
+    40% 70%,
+    50% 30%,
+    60% 65%,
+    72% 40%,
+    82% 70%,
+    92% 45%,
+    100% 65%,
+    100% 100%
+  );
+}
+
+.mountains.back {
+  background: #151329;
+
+  opacity: 0.8;
+
+  transform: scale(1.1);
+}
+
+.mountains.front {
+  bottom: 20%;
+
+  background: #090914;
+
+  opacity: 0.95;
+
+  transform: scale(1.2);
+}
+
+/* =========================
+   LAKE
+========================= */
+
+.lake {
+  position: absolute;
+
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 30%;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20, 18, 40, 0.95),
+      #05050d
+    );
+
+  z-index: 1;
+}
+
+.lake::before {
+  content: "";
+
+  position: absolute;
+
+  top: 5%;
+
+  left: 30%;
+
+  width: 40%;
+  height: 2px;
+
+  background: rgba(255, 190, 210, 0.25);
+
+  filter: blur(2px);
+}
+
+.lake-reflection {
+  position: absolute;
+
+  top: 20%;
+  left: 35%;
+
+  width: 30%;
+  height: 60%;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 200, 220, 0.12),
+    transparent
+  );
+
+  filter: blur(8px);
+}
+
+/* =========================
+   STARS
+========================= */
+
+.particles {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+.particles span {
+  position: absolute;
+
+  width: 2px;
+  height: 2px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  box-shadow: 0 0 7px white;
+
+  opacity: 0.5;
+}
+
+.particles span:nth-child(1) { left: 5%; top: 15%; }
+.particles span:nth-child(2) { left: 12%; top: 35%; }
+.particles span:nth-child(3) { left: 20%; top: 12%; }
+.particles span:nth-child(4) { left: 28%; top: 28%; }
+.particles span:nth-child(5) { left: 36%; top: 10%; }
+.particles span:nth-child(6) { left: 45%; top: 22%; }
+.particles span:nth-child(7) { left: 54%; top: 12%; }
+.particles span:nth-child(8) { left: 63%; top: 28%; }
+.particles span:nth-child(9) { left: 72%; top: 10%; }
+.particles span:nth-child(10) { left: 82%; top: 32%; }
+.particles span:nth-child(11) { left: 92%; top: 18%; }
+
+.particles span:nth-child(n + 12) {
+  left: calc(5% + (var(--i) * 5%));
+}
+
+/* =========================
+   PETALS
+========================= */
+
+.petals {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+.petals span {
+  position: absolute;
+
+  top: -50px;
+
+  font-size: 18px;
+
+  opacity: 0.6;
+
+  filter: blur(0.2px);
+}
+
+.petals span:nth-child(1) { left: 5%; }
+.petals span:nth-child(2) { left: 12%; }
+.petals span:nth-child(3) { left: 20%; }
+.petals span:nth-child(4) { left: 28%; }
+.petals span:nth-child(5) { left: 36%; }
+.petals span:nth-child(6) { left: 44%; }
+.petals span:nth-child(7) { left: 52%; }
+.petals span:nth-child(8) { left: 60%; }
+.petals span:nth-child(9) { left: 68%; }
+.petals span:nth-child(10) { left: 76%; }
+.petals span:nth-child(11) { left: 84%; }
+.petals span:nth-child(12) { left: 92%; }
+
+/* =========================
+   LANTERNS
+========================= */
+
+.lanterns {
+  position: absolute;
+
+  bottom: 23%;
+
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-around;
+
+  z-index: 4;
+
+  opacity: 0.75;
+}
+
+.lanterns span {
+  font-size: 28px;
+
+  filter:
+    drop-shadow(0 0 12px rgba(255, 130, 70, 0.7));
+
+  animation: lanternFloat 4s ease-in-out infinite;
+}
+
+.lanterns span:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.lanterns span:nth-child(3) {
+  animation-delay: 2s;
+}
+
+@keyframes lanternFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* =========================
+   FOREGROUND ROSES
+========================= */
+
+.flower-foreground {
+  position: absolute;
+
+  bottom: -15px;
+  left: 0;
+
+  width: 100%;
+  height: 220px;
+
+  z-index: 6;
+
+  pointer-events: none;
+}
+
+.flower-foreground .rose-svg {
+  position: absolute;
+
+  bottom: 0;
+
+  transform-origin: bottom center;
+}
+
+.rose-one {
+  left: 8%;
+  transform: scale(1.1) rotate(-12deg);
+}
+
+.rose-two {
+  left: 25%;
+  transform: scale(.8) rotate(8deg);
+}
+
+.rose-three {
+  left: 45%;
+  transform: scale(1.35) rotate(-4deg);
+}
+
+.rose-four {
+  right: 25%;
+  transform: scale(.85) rotate(10deg);
+}
+
+.rose-five {
+  right: 7%;
+  transform: scale(1.15) rotate(-10deg);
+}
+
+@keyframes flowerSway {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+
+  50% {
+    transform: rotate(4deg) translateY(-4px);
+  }
+}
+
+/* =========================
+   HERO CONTENT
+========================= */
+
+.hero-content {
+  position: relative;
+
+  z-index: 8;
+
+  width: min(800px, 90%);
+
+  text-align: center;
+}
+
+.hero-title {
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(38px, 5vw, 68px);
+
+  font-weight: 400;
+
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  margin: 8px 0 35px;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(28px, 4vw, 52px);
+
+  font-weight: 400;
+
+  font-style: italic;
+
+  opacity: 0.9;
+}
+
+.hero-description {
+  max-width: 520px;
+
+  margin: auto;
+
+  font-size: 12px;
+
+  letter-spacing: 4px;
+
+  line-height: 2;
+
+  opacity: 0.75;
+}
+
+.hero-heart {
+  margin: 25px auto;
+
+  font-size: 42px;
+
+  text-shadow:
+    0 0 15px rgba(255, 100, 170, 0.9),
+    0 0 40px rgba(255, 50, 140, 0.5);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.begin-button {
+  padding: 15px 30px;
+
+  border-radius: 50px;
+
+  border: 1px solid rgba(255, 140, 190, 0.7);
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: white;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(12px);
+
+  transition: all 0.35s ease;
+}
+
+.begin-button:hover {
+  transform: translateY(-4px);
+
+  background: rgba(255, 100, 160, 0.12);
+
+  box-shadow:
+    0 0 20px rgba(255, 100, 170, 0.4);
+}
+
+.begin-button span {
+  margin-left: 10px;
+}
+
+/* =========================
+   SCROLL
+========================= */
+
+.scroll-indicator {
+  position: absolute;
+
+  bottom: 25px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  z-index: 10;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 8px;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+  opacity: 0.45;
+}
+
+.scroll-indicator span {
+  width: 1px;
+
+  height: 30px;
+
+  background: white;
+
+  animation: scrollAnimation 2s infinite;
+}
+
+@keyframes scrollAnimation {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  .moon {
+    width: 100px;
+    height: 100px;
+
+    right: 8%;
+    top: 13%;
+  }
+
+  .hero-content {
+    margin-top: 20px;
+  }
+
+  .hero-title {
+    font-size: 38px;
+  }
+
+  .hero-subtitle {
+    font-size: 30px;
+  }
+
+  .hero-description {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .rose {
+    font-size: 45px;
+  }
+
+  .lanterns span {
+    font-size: 20px;
+  }
+}

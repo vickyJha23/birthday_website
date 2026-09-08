@@ -1,0 +1,52 @@
+@import "tailwindcss";
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  background: #090711;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+button,
+a {
+  font-family: inherit;
+}
+
+.next-scene-placeholder {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 30px;
+}
+.test-surprise {
+  position: fixed;
+
+  right: 30px;
+  bottom: 30px;
+
+  z-index: 200;
+
+  padding: 14px 22px;
+
+  border: 1px solid rgba(255,255,255,.2);
+
+  border-radius: 30px;
+
+  background: rgba(255,255,255,.08);
+
+  color: white;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+}

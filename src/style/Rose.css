@@ -1,0 +1,56 @@
+.rose-svg {
+  width: 120px;
+  height: 180px;
+
+  overflow: visible;
+
+  filter:
+    drop-shadow(
+      0 0 12px
+      rgba(255, 70, 140, .35)
+    );
+}
+
+.rose-stem {
+  fill: none;
+
+  stroke: #416b48;
+
+  stroke-width: 4;
+
+  stroke-linecap: round;
+}
+
+.rose-leaf {
+  fill: #315a3c;
+
+  opacity: .95;
+}
+
+.rose-petal {
+  stroke: rgba(255,255,255,.08);
+
+  stroke-width: 1;
+}
+
+.rose-petal.outer {
+  fill: #8f1647;
+}
+
+.rose-petal.middle {
+  fill: #c52865;
+}
+
+.rose-petal.inner {
+  fill: #ed4b83;
+}
+
+.rose-center {
+  fill: #ff9dbc;
+
+  filter:
+    drop-shadow(
+      0 0 5px
+      rgba(255,150,190,.8)
+    );
+}

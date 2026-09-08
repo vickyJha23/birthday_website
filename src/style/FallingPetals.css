@@ -1,0 +1,34 @@
+.falling-petals {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 4;
+}
+
+.petal {
+  position: absolute;
+
+  width: 9px;
+  height: 14px;
+
+  border-radius:
+    100% 0 100% 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff8bb7,
+      #a81752
+    );
+
+  filter:
+    drop-shadow(
+      0 0 5px
+      rgba(255,80,150,.4)
+    );
+}

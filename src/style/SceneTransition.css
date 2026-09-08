@@ -1,0 +1,24 @@
+.scene-wrapper {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+}
+
+.scene-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 9999;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #160b18,
+      #030208 70%
+    );
+
+  opacity: 0;
+}
